@@ -37,8 +37,8 @@ sql_beer = """ INSERT INTO beer (name,percentageAlcohol,category) VALUES
 
 sql_user = """ INSERT INTO user (pseudo,mail,password) VALUES (test,test@test.com,test) """
 
-cursor.execute(sql_delete_list)
-cursor.execute(sql_delete_beer)
-cursor.execute(sql_query)
-# cursor.execute(sql_querybis)
-cursor.execute(sql_querybis_bis)
+# cursor.execute(sql_delete_list)
+# cursor.execute(sql_delete_beer)
+# cursor.execute(sql_query)
+# # cursor.execute(sql_querybis)
+# cursor.execute(sql_querybis_bis)
