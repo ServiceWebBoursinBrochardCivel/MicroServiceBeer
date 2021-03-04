@@ -11,7 +11,7 @@ def beer_by_user(mail) :
     if request.method=='GET' :
         cursor.execute("SELECT * FROM beer WHERE id in (SELECT beer_id from beerlist where user_id in (SELECT id FROM user WHERE mail =?))",(str(mail),))
         beers = [
-            dict(id=row[0],name = row[1], percentageAlcohol=row[2], category=row[3])
+            dict(id=row[0],name = row[1], percentageAlcohol=row[2], category=row[3],stock=row[4],image=row[5])
             for row in cursor.fetchall()
         ]
         cursor.close()
@@ -23,8 +23,9 @@ def favorite():
     conn = connection.db_connection()
     cursor= conn.cursor()
     if request.method=='POST' :
-        beer_id=request.form['beer_id']
-        user_id = request.form['user_id']
+        data = request.get_json()
+        beer_id=data['beer_id']
+        user_id = data['user_id']
         sqllist = """INSERT INTO beerlist (user_id,beer_id) VALUES (?,?) """
         cursor.execute(sqllist,(user_id,beer_id))
         conn.commit()
@@ -32,8 +33,9 @@ def favorite():
         conn.close()
         return f"Beer {beer_id} add to your favlist"
     if request.method=='DELETE' :
-        beer_id=request.form['beer_id']
-        user_id = request.form['user_id']
+        data = request.get_json()
+        beer_id=data['beer_id']
+        user_id = data['user_id']
         sqllist = """DELETE FROM beerlist where user_id = ? and beer_id=? """
         cursor.execute(sqllist,(user_id,beer_id))
         conn.commit()
