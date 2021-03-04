@@ -26,6 +26,7 @@ sql_querybis_bis = """ CREATE table `beerlist` (
 id INT PRIMARY KEY AUTO_INCREMENT,
 user_id INT NOT NULL,
 beer_id INT NOT NULL,
+quantite INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id),
 FOREIGN KEY (beer_id) REFERENCES beer(id))"""
 
