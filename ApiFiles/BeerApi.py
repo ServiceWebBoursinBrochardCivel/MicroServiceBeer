@@ -39,11 +39,11 @@ def single_beer(id):
         cursor.execute("SELECT * FROM beer WHERE id =?",(int(id),))
         rows = cursor.fetchall()
         for r in rows :
-            beer = r
+            beer = dict(id=id,name = r[1], percentageAlcohol=r[2], category=r[3],stock=r[4],image=r[5])
         if beer is not None :
             cursor.close()
             conn.close()
-            return jsonify(beer),200
+            return jsonify(beer)
         else :
             cursor.close()
             conn.close()
