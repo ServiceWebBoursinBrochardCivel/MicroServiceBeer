@@ -18,11 +18,12 @@ def beers() :
             conn.close()
             return jsonify(beers)
     if request.method=='POST':
-        new_name = request.form['name']
-        new_percentageAlcohol = request.form['percentageAlcohol']
-        new_category = request.form['category']
-        new_stock = request.form['stock']
-        new_image = request.form['image']
+        data = request.get_json()
+        new_name = data['name']
+        new_percentageAlcohol = data['percentageAlcohol']
+        new_category = data['category']
+        new_stock = data['stock']
+        new_image = data['image']
         sql = """INSERT INTO beer (name,percentageAlcohol,category,stock,image) VALUES (?,?,?,?,?) """
         cursor.execute(sql,(new_name,new_percentageAlcohol,new_category,new_stock,new_image))
         conn.commit()
@@ -57,11 +58,12 @@ def single_beer(id):
                     stock=?,
                     image=?
                 WHERE id=? """
-        name= request.form["name"]
-        percentageAlcohol = request.form["percentageAlcohol"]
-        category = request.form["category"]
-        stock=request.form['stock']
-        image = request.form['image']
+        data = request.get_json()
+        name= data["name"] 
+        percentageAlcohol = data["percentageAlcohol"]
+        category = data["category"]
+        stock=data['stock']
+        image = data['image']
         updated_beer = {
             'id':id,
             'name' : name,
