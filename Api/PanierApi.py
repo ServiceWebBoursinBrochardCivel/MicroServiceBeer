@@ -1,5 +1,5 @@
 from flask import Blueprint,request,jsonify
-import DatabaseFiles.connection as connection
+import Database.connection as connection
 
 panier_api = Blueprint('panier_api',__name__)
 
@@ -9,9 +9,9 @@ def beer_by_user(user_id) :
     conn = connection.db_connection()
     cursor= conn.cursor()
     if request.method=='GET' :
-        cursor.execute("SELECT * FROM beer WHERE id in (SELECT beer_id,quantite from beerlist where user_id = ?)",(int(user_id),))
+        cursor.execute("SELECT beer_id,quantite from beerlist where user_id = ?",(int(user_id),))
         beers = [
-            dict(id=row[0],name = row[1], percentageAlcohol=row[2], category=row[3],stock=row[4],image=row[5])
+            dict(beer_id = row[0],quantite=row[1])
             for row in cursor.fetchall()
         ]
         cursor.close()

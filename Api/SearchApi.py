@@ -1,5 +1,5 @@
 from flask import Blueprint,request,jsonify
-import DatabaseFiles.connection as connection
+import Database.connection as connection
 
 search_api = Blueprint('search_api',__name__)
 
