@@ -5,7 +5,7 @@ search_api = Blueprint('search_api',__name__)
 
 @search_api.route('/search/<string:name>',methods=['GET'])
 def search(name):
-    token = request.headers['token']
+    token = request.headers.get('token')
     if(verifyToken(token)) :
         conn = connection.db_connection()
         cursor= conn.cursor()

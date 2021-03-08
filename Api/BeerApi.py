@@ -6,7 +6,7 @@ beer_api = Blueprint('beer_api',__name__)
 
 @beer_api.route('/beers', methods=['GET','POST'])
 def beers() :
-    token = request.headers['token']
+    token = request.headers.get('token')
     if(verifyToken(token)) :
         conn = connection.db_connection()
         cursor = conn.cursor()
@@ -39,7 +39,7 @@ def beers() :
 
 @beer_api.route('/beer/<int:id>',methods=['GET','PUT','DELETE'])
 def single_beer(id):
-    token = request.headers['token']
+    token = request.headers.get('token')
     if(verifyToken(token)) :
         conn = connection.db_connection()
         cursor = conn.cursor()

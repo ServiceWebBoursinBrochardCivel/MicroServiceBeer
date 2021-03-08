@@ -7,7 +7,7 @@ panier_api = Blueprint('panier_api',__name__)
 
 @panier_api.route('/panier/<int:user_id>',methods=['GET'])
 def beer_by_user(user_id) :
-    token = request.headers['token']
+    token = request.headers.get('token')
     if(verifyToken(token)) :
         conn = connection.db_connection()
         cursor= conn.cursor()
@@ -27,7 +27,7 @@ def beer_by_user(user_id) :
     
 @panier_api.route('/panier/<int:beer_id>/<int:user_id>',methods=['DELETE','PUT'])
 def changePanier(beer_id,user_id) :
-    token = request.headers['token']
+    token = request.headers.get('token')
     if(verifyToken(token)) :
         conn = connection.db_connection()
         cursor= conn.cursor()
@@ -59,7 +59,7 @@ def changePanier(beer_id,user_id) :
 
 @panier_api.route('/panier',methods=['POST'])
 def panier():
-    token = request.headers['token']
+    token = request.headers.get('token')
     if(verifyToken(token)) :
         conn = connection.db_connection()
         cursor= conn.cursor()
