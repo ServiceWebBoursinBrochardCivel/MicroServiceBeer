@@ -23,8 +23,6 @@ def beer_by_user(user_id) :
     else :
         return "Your token is expired"
     
-    
-    
 @panier_api.route('/panier/<int:beer_id>/<int:user_id>',methods=['DELETE','PUT'])
 def changePanier(beer_id,user_id) :
     token = request.headers.get('token')
