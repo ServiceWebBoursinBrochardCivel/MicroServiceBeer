@@ -1,0 +1,455 @@
+{
+    "openapi":"3.0.0",
+    "info" :{
+        "description":"beerapi",
+        "version":"1.0.0",
+        "title":"BeerApi",
+        "contcat":{
+            "email" : "..."
+        }
+    },
+    "servers" :[
+        {
+            "url" : "/"
+        }
+    ],
+    "tags" :[
+        {
+            "name" : "Beer Request",
+            "description" : "Beer Api request"
+        },
+        {
+            "name" : "Panier Request",
+            "description" : "Panier Api request"
+        },
+        {
+            "name" : "Search Request",
+            "description" : "Search Beer Api request"
+        }
+    ],
+    "paths" : {
+        "/beers" :{
+            "get" :{
+                "tags" :[
+                    "Beer Request"
+                ],
+                "summary" : "Returns beerRequetes",
+                "responses" : {
+                    "200" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    }
+                }
+            },
+            "post" :{
+                "tags" :[
+                    "Beer Request"
+                ],
+                "summary" : "Create a new beer beerRequetes",
+                "requestBody":{
+                    "decription":"Beer Request Object",
+                    "required" : true,
+                    "content" : {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/beerRequest"
+                            }
+                        }
+                    }
+                },
+                "produces" : [
+                    "application/json"
+                ],
+                "responses":{
+                    "201":{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    }
+                },
+                "400" :{
+                    "description" : "Failde. Bad post data"
+                }
+            }
+        },
+        "/beer/{id}" :{
+            "parameters" :[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "decription": "ID of the beer",
+                    "type":"integer"
+                }
+            ],
+            "get" : {
+                "tags" :[
+                    "Beer Request"
+                ],
+                "summary" : "Get beer with given ID",
+                "parameters" :[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the beer",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    }
+            ],
+                "responses" : {
+                    "200" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Something Wrong"
+                    }
+                }
+            },
+            "put" : {
+                "tags" :[
+                    "Beer Request"
+                ],
+                "summary" : "Update with given ID",
+                "parameters" :[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the beer",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "decription":"Beer Request Object",
+                    "required" : true,
+                    "content" : {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/beerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Failed. Beer request not found"
+                    }
+                }
+            },
+            "delete" : {
+                "tags" :[
+                    "Beer Request"
+                ],
+                "summary" : "Delete beer with given ID",
+                "parameters" :[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the beer",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    }
+            ],
+                "responses" : {
+                    "204" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Somethong Wrong"
+                    }
+                }
+            }
+        },
+        "/panier" :{
+            "post" :{
+                "tags" :[
+                    "Panier Request"
+                ],
+                "summary" : "Add a beer in the panier of the user",
+                "requestBody":{
+                    "decription":"Beer Request Object",
+                    "required" : true,
+                    "content" : {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/panierRequest"
+                            }
+                        }
+                    }
+                },
+                "produces" : [
+                    "application/json"
+                ],
+                "responses":{
+                    "201":{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/panierRequest"
+                        }
+                    }
+                },
+                "400" :{
+                    "description" : "Failed. Bad post data"
+                }
+            }
+        },
+        "/panier/{id}" :{
+            "parameters" :[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "decription": "ID of the user",
+                    "type":"integer"
+                }
+            ],
+            "get" : {
+                "tags" :[
+                    "Panier Request"
+                ],
+                "summary" : "Get panier for the user with given ID",
+                "parameters" :[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the user",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    }
+            ],
+                "responses" : {
+                    "200" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/panierRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Something Wrong"
+                    }
+                }
+            }
+        },
+        "/panier/{user_id}/{beer_id}" :{
+            "put" : {
+                "tags" :[
+                    "Panier Request"
+                ],
+                "summary" : "Update stockage for the user with the given id and beer with the other given id ",
+                "parameters" :[
+                    {
+                        "name":"user_id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the user",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    },
+                    {
+                        "name":"beer_id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the beer",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "decription":"Panier Request Object",
+                    "required" : true,
+                    "content" : {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/panierRequest"
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/panierRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Failed. Beer request not found"
+                    }
+                }
+            },
+            "delete" : {
+                "tags" :[
+                    "Panier Request"
+                ],
+                "summary" : "Remove the given article from the panier of the given user",
+                "parameters" :[
+                    {
+                        "name":"user_id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the user",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    },
+                    {
+                        "name":"beer_id",
+                        "in":"path",
+                        "required":true,
+                        "decription": "ID of the beer",
+                        "schema":{
+                            "$ref":"#/components/schemas/id"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "204" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Somethong Wrong"
+                    }
+                }
+            }
+        },
+        "/search/{name}" :{
+            "tags" :[
+                "Search Request"
+            ],
+            "summary" : "Name of the researched beer",
+            "parameters" :[
+                {
+                    "name":"name",
+                    "in":"path",
+                    "required":true,
+                    "decription": "name of the beer",
+                    "schema":{
+                        "$ref":"#/components/schemas/searchRequest"
+                    }
+                }
+            ],
+            "responses" : {
+                "204" :{
+                    "description" : "OK",
+                    "schema" :{
+                        "$ref":"#/components/schemas/beerRequest"
+                    }
+                },
+                "400":{
+                    "decription" : "Failed. Beer id not correct"
+                },
+                "404" :{
+                    "description" : "Somethong Wrong"
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "id" :{
+                "properties" :{
+                    "id" :{
+                        "type" : "integer"
+                    }
+                }
+            },
+            "beerRequest" :{
+                "type" : "object",
+                "properties" :{
+                    "name" :{
+                        "type" : "string",
+                        "format" :"string" 
+                    },
+                    "percentageAlcohol" :{
+                        "type" : "string",
+                        "format" : "decimal"
+                    },
+                    "category" : {
+                        "type" : "string",
+                        "format" : "string"
+                    },
+                    "stock" : {
+                        "type" : "integer",
+                        "format" : "integer"
+                    },
+                    "image" : {
+                        "type" : "string",
+                        "format" : "string"
+                    }
+                }
+            },
+            "panierRequest" :{
+                "type" :"object",
+                "properties" :{
+                    "user_id" :{
+                        "type" : "integer",
+                        "format" : "integer"
+                    },
+                    "beer_id":{
+                        "type" : "integer",
+                        "format" : "integer"
+                    },
+                    "quantite" : {
+                        "type" : "integer",
+                        "format" : "integer"
+                    }
+                }
+            },
+            "searchRequest" :{
+                "type" : "object",
+                "properties" :{
+                    "name" :{
+                        "type":"string",
+                        "format" : "string"
+                    }
+                }
+            }
+        }
+    }
+}

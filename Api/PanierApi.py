@@ -1,5 +1,6 @@
 from flask import Blueprint,request,jsonify
 import Database.connection as connection
+from main import verifyToken
 
 panier_api = Blueprint('panier_api',__name__)
 
