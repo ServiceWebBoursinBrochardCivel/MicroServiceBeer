@@ -1,10 +1,10 @@
 {
     "openapi":"3.0.0",
     "info" :{
-        "description":"beerapi",
+        "description":"Swagger documentation of our BeerApi",
         "version":"1.0.0",
         "title":"BeerApi",
-        "contcat":{
+        "contact":{
             "email" : "..."
         }
     },

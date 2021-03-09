@@ -4,7 +4,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from Api.BeerApi import beer_api
 from Api.SearchApi import search_api
 from Api.PanierApi import panier_api
-import requests
+
 
 app=Flask(__name__)
 CORS(app)
@@ -32,10 +32,3 @@ app.register_blueprint(swaggerui_api,url_prefix=SWAGGER_URL)
 if __name__ =='__main__' :
     app.run()
 
-def verifyToken(token) :
-    return True
-    result = requests.get("")
-    if(result.text != "Error") :
-        return True
-    else :
-        return False
