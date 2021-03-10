@@ -1,7 +1,7 @@
 {
     "openapi":"3.0.0",
     "info" :{
-        "description":"Swagger documentation of our BeerApi",
+        "description":"Swagger documentation of our BeerApi.<br> All of our functionnalities cannot work without a token from our other microservice User.",
         "version":"1.0.0",
         "title":"BeerApi",
         "contact":{
@@ -359,33 +359,35 @@
             }
         },
         "/search/{name}" :{
-            "tags" :[
-                "Search Request"
-            ],
-            "summary" : "Name of the researched beer",
-            "parameters" :[
-                {
-                    "name":"name",
-                    "in":"path",
-                    "required":true,
-                    "decription": "name of the beer",
-                    "schema":{
-                        "$ref":"#/components/schemas/searchRequest"
+            "get":{
+                "tags" :[
+                    "Search Request"
+                ],
+                "summary" : "Name of the researched beer",
+                "parameters" :[
+                    {
+                        "name":"name",
+                        "in":"path",
+                        "required":true,
+                        "decription": "name of the beer",
+                        "schema":{
+                            "$ref":"#/components/schemas/name"
+                        }
                     }
-                }
-            ],
-            "responses" : {
-                "204" :{
-                    "description" : "OK",
-                    "schema" :{
-                        "$ref":"#/components/schemas/beerRequest"
+                ],
+                "responses" : {
+                    "204" :{
+                        "description" : "OK",
+                        "schema" :{
+                            "$ref":"#/components/schemas/beerRequest"
+                        }
+                    },
+                    "400":{
+                        "decription" : "Failed. Beer id not correct"
+                    },
+                    "404" :{
+                        "description" : "Somethong Wrong"
                     }
-                },
-                "400":{
-                    "decription" : "Failed. Beer id not correct"
-                },
-                "404" :{
-                    "description" : "Somethong Wrong"
                 }
             }
         }
@@ -396,6 +398,13 @@
                 "properties" :{
                     "id" :{
                         "type" : "integer"
+                    }
+                }
+            },
+            "name":{
+                "properties":{
+                    "name":{
+                        "type":"string"
                     }
                 }
             },
@@ -438,15 +447,6 @@
                     "quantite" : {
                         "type" : "integer",
                         "format" : "integer"
-                    }
-                }
-            },
-            "searchRequest" :{
-                "type" : "object",
-                "properties" :{
-                    "name" :{
-                        "type":"string",
-                        "format" : "string"
                     }
                 }
             }

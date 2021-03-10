@@ -17,6 +17,7 @@ app.register_blueprint(panier_api)
 def send_api(path) :
     return send_from_directory('Api',path)
 
+
 SWAGGER_URL = '/spec'
 API_URL = '/Api/swagger.json'
 swaggerui_api = get_swaggerui_blueprint(
